@@ -91,3 +91,4 @@ if rev_numbers:
     print(f"Average: {average_revision:.2f}")
 else:
     print("error")
+
