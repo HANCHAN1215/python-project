@@ -203,7 +203,7 @@ task_list.pack()
 
 app.mainloop()
 
-#(2023/10/16)
+#(2023/10/16 5주차 과제)
 
 import tkinter as tk
 import sqlite3
@@ -288,3 +288,72 @@ result_label.grid(row=5, columnspan=2)
 window.mainloop()
 
 conn.close()
+
+#(2023/10/23 6주차 과제)
+
+#1
+import queue
+
+documents = {'A': 0, 'B': 2, 'C': 1, 'D': 1}
+
+sorted_documents = sorted(documents.items(), key=lambda x: x[1], reverse=True)
+
+stack = []
+q = queue.Queue()
+
+for document, importance in sorted_documents:
+    q.put((document, importance))
+
+while not q.empty():
+    document, importance = q.get()
+    print(f"{document}: 중요도 {importance}")
+
+#2
+from collections import deque
+
+def find_price_changes(prices):
+    n = len(prices)
+    result = [-1] * n  
+
+    stack = deque()  
+
+    for i in range(n):
+        while stack and prices[i] < prices[stack[-1]]:
+            j = stack.pop()
+            result[j] = i - j
+        stack.append(i)
+
+    while stack:
+        j = stack.pop()
+        result[j] = n - j - 1
+
+    return result
+
+price = [3, 5, 2, 6, 1, 4, 7]
+
+changes = find_price_changes(price)
+for i, change in enumerate(changes):
+    print(f"Price의 {i}번째 값은 {change}초 후에 떨어진다.")
+
+#3
+from collections import Counter
+
+text_1 = "Python is a popular programming language. It is widely used for web development and data analysis. Machine learning and artificial intelligence are important topics in Python programming.".lower()
+text_2 = "Java is another widely used programming language. It is known for its portability and versatility. Android app development can be done using Java programming.".lower()
+
+words_1 = text_1.split()
+words_2 = text_2.split()
+
+word_count_1 = Counter(words_1)
+word_count_2 = Counter(words_2)
+
+for word in word_count_1.keys():
+    count_1 = word_count_1[word]
+    count_2 = word_count_2.get(word, 0)  
+    print(f"'{word}': 파일1 - {count_1}, 파일2 - {count_2}")
+
+for word in word_count_2.keys():
+    if word not in word_count_1:
+        count_1 = 0
+        count_2 = word_count_2[word]
+        print(f"'{word}': 파일1 - {count_1}, 파일2 - {count_2}")
