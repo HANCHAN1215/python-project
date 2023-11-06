@@ -1,15 +1,8 @@
-import queue
+burger_prices = [int(input()) for _ in range(3)]
 
-documents = {'A': 0, 'B': 2, 'C': 1, 'D': 1}
+drink_prices = [int(input()) for _ in range(2)]
 
-sorted_documents = sorted(documents.items(), key=lambda x: x[1], reverse=True)
+set_menu_prices = [burger_price + drink_price - 50 for burger_price in burger_prices for drink_price in drink_prices]
 
-stack = []
-q = queue.Queue()
-
-for document, importance in sorted_documents:
-    q.put((document, importance))
-
-while not q.empty():
-    document, importance = q.get()
-    print(f"{document}: 중요도 {importance}")
+min_set_menu_price = min(set_menu_prices)
+print(min_set_menu_price)

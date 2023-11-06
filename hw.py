@@ -357,3 +357,54 @@ for word in word_count_2.keys():
         count_1 = 0
         count_2 = word_count_2[word]
         print(f"'{word}': 파일1 - {count_1}, 파일2 - {count_2}")
+
+#2023/11/06 7주차 과제
+
+#1
+
+burger_prices = [int(input()) for _ in range(3)]
+
+drink_prices = [int(input()) for _ in range(2)]
+
+set_menu_prices = [burger_price + drink_price - 50 for burger_price in burger_prices for drink_price in drink_prices]
+
+min_set_menu_price = min(set_menu_prices)
+print(min_set_menu_price)
+
+#2
+
+numbers = []
+
+for i in range(10):
+    while True:
+        num = int(input(f"정수 {i+1}을 입력하세요: "))
+        if 0 <= num <= 1000:
+            numbers.append(num)
+            break
+        else:
+            print("1000 이하이고 음이 아닌 정수를 입력하세요.")
+
+numbers_result = [num % 42 for num in numbers]
+
+numbers_result_set = len(set(numbers_result))
+print(numbers_result_set)
+
+#3
+
+def reverse_words_in_string(input_string):
+    words = input_string.split()
+    
+    reversed_words = []
+    
+    for word in words:
+        if len(word) >= 5:
+            reversed_word = ''.join(reversed(word))
+            reversed_words.append(reversed_word)
+    
+    return reversed_words
+
+input_string = "This is a more advanced comprehension exercise to practice"
+
+result = reverse_words_in_string(input_string)
+
+print(result)
